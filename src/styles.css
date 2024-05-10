@@ -1,145 +1,432 @@
 :root {
-    --primary-color: #173F71;
-    --secondary-color: #F29B33;
-    --icon-sun: #ffffff;
-    --icon-moon: #dce3ff;
-    --switch-circle-bg: #3d3d3d;
-    --switch-circle-lpos: 4px;
-    --switch-circle-rpos: 40px;
-    --default-transition: fill .1s ease-in-out,
-    color .1s ease-in-out,
-    background-color .1s ease-in-out,
-    box-shadow .1s ease-in-out,
-    transform .1s ease-in-out;
+  --primary-color: #173f71;
+  --secondary-color: #f29b33;
+  --default-transition: fill 0.1s ease-in-out, color 0.1s ease-in-out,
+    background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out,
+    transform 0.1s ease-in-out;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    border: 0;
-    list-style: none;
-    text-decoration: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 body {
-    height: 100vh;
-    line-height: 1.5;
+  height: 100dvh;
+  line-height: 1.5;
 }
 
 header {
-    padding: 24px;
+  /* padding: 24px; */
+
+  .logo {
+    width: 3rem;
+    padding-right: 5px;
+  }
+
+  .title {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-    background-color: #f0f2f3;
+    border-bottom: 1px solid rebeccapurple;
+    padding-bottom: 10px;
 
-    #open-nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        height: 50px;
-        width: 50px;
-        border-radius: 4px;
-        font-size: 35px;
-        color: var(--primary-color);
-        transition: var(--default-transition);
+    p {
+      font-size: 30px;
+      color: var(--primary-color);
+      text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
     }
-
-    #open-nav:hover { 
-        background-color: var(--secondary-color);
-    }
-
-    .logo {
-        width: 4rem;
-        padding-right:5px;
-    }
-
-    .title {
-        justify-self: start;
-        display: flex;
-        align-items: center;
-        transition: var(--default-transition);
-
-        p {
-            margin-top: -6px;
-            font-family: "Paytone One", sans-serif;
-            font-size: 40px;
-            color: var(--primary-color);
-            text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-            transition: var(--default-transition);
-        }
-    }
-
-    #theme-toggle {
-        position: relative;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        height: 36px;
-        width: 72px;
-        border-radius: 50px;
-        background-color: #b1b0b5;
-        padding: 8px;
-        gap: 16px;
-        transition: var(--default-transition);
-
-        svg {
-            z-index: 1;
-            transition: var(--default-transition);
-        }
-
-        #icon-sun {
-            fill: var(--icon-sun);
-            stroke: var(--icon-sun);
-        }
-
-        #icon-moon {
-            fill: var(--icon-moon);
-            stroke: var(--icon-moon);
-        }
-    }
-
-    #theme-toggle::before {
-        content: '';
-        position: absolute;
-        z-index: 0;
-        left: 0;
-        border-radius: 50px;
-        width: 28px;
-        height: 28px;
-        background-color: var(--switch-circle-bg);
-        transform: translateX(var(--switch-circle-lpos));
-        transition: var(--default-transition);
-    }
+  }
 }
+
 #content {
-    height: 100dvh;
+  /* flex: 1; */
+  height: 100dvh;
+  display: flex;
 }
+
 footer {
-    display: flex;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--primary-color);
-    transition: var(--default-transition);
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  transition: var(--default-transition);
 
-    a {
-        color: var(--secondary-color);
-        text-decoration: none;
-        font-size: 16px;
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 16px;
 
-        .fa-github {
-            font-size: 22px;
-            transition: transform 0.3s ease-in-out;
-        }
+    .fa-github {
+      font-size: 22px;
+      transition: transform 0.3s ease-in-out;
+    }
 
-        .fa-github:hover {
-            transform: rotate(360deg) scale(1.2);
-        }
-    } 
+    .fa-github:hover {
+      transform: rotate(360deg) scale(1.2);
+    }
+  }
+}
+
+.left-nav {
+  box-sizing: border-box;
+  background-color: #f0f2f3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 250px;
+  padding: 20px;
+  font-size: 17px;
+}
+
+.main {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+  width: 100dvw;
+}
+
+.nav-item {
+  padding: 0 10px 0 15px;
+  display: flex;
+}
+
+.nav-icon {
+  width: 40px;
+}
+
+.all-tasks,
+.favorites,
+.notes,
+.projects {
+  align-items: center;
+}
+
+.nav-item:hover {
+  border-left: 5px solid #3d3d3d;
+  background-color: #dbdae1;
+  cursor: pointer;
+}
+
+.projects {
+  justify-content: space-between;
+  padding-right: 22px;
+}
+
+.notes {
+  justify-content: space-between;
+  padding-right: 22px;
+}
+
+.notes-left-gp,
+.projects-left-gp {
+  display: flex;
+  align-items: center;
+}
+
+.add-note-btn {
+  color: white;
+  background-color: #078a33;
+  border-radius: 5px;
+  display: flex;
+}
+
+.add-note-btn:hover {
+  background-color: #85b695;
+  color: #078a33;
+  cursor: pointer;
+}
+
+.projects-title {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.project {
+  margin-left: 25px;
+  font-size: 14px;
+  padding: 0 10px 0 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project:hover {
+  font-weight: bolder;
+}
+
+.nav-item > .count,
+.notes-left-gp > .count,
+.projects-left-gp > .count {
+  background-color: #265084;
+  color: whitesmoke;
+  font-size: 11px;
+  padding: 3px;
+  margin: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project > .count {
+  background-color: #576d88;
+  color: whitesmoke;
+  font-size: 10px;
+  padding: 3px;
+  margin: 5px;
+  height: 17px;
+  width: 17px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* TASKS ################################################################################################*/
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f2f3;
+  padding: 5px 15px;
+  border-radius: 5px;
+  /* display: none; */
+}
+
+.task:hover {
+  box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.5);
+  transform: scaleZ();
+}
+
+.left-group {
+  display: flex;
+  gap: 15px;
+}
+
+.right-group {
+  display: flex;
+  gap: 50px;
+}
+
+.title {
+  font-size: 15px;
+}
+
+.details {
+  font-size: 12px;
+  color: #576d88;
+}
+
+.date-due {
+  color: #da1e28;
+}
+
+.priority {
+  width: 50px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.high {
+  background-color: #f8b7bd;
+  color: #ff000d;
+}
+
+.medium {
+  background-color: #f8d6be;
+  color: #fc7c20;
+}
+
+.low {
+  background-color: #b3d6bd;
+  color: #24a148;
+}
+
+.delete:hover {
+  color: #da1e28;
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+.add-task {
+  background-color: #24a148;
+  width: 140px;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 5px;
+  font-size: 17px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.add-task:hover {
+  background-color: #187e35;
+}
+
+/* ADD TASK FORM ######################################################################*/
+
+#add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* display: none; */
+}
+
+input,
+select,
+option {
+  border: 1px solid #b5c0cc;
+  padding: 5px 15px;
+  border-radius: 5px;
+  height: 35px;
+  font-weight: bold;
+}
+
+input:focus {
+  border: 2px solid #078a33;
+}
+
+#submit-task,
+#submit-note,
+#submit-project {
+  background-color: #24a148;
+  color: white;
+  cursor: pointer;
+}
+
+#submit-task:hover,
+#submit-note:hover,
+#submit-project:hover {
+  background-color: #187e35;
+}
+
+.add-task-form-label,
+.add-note-form-label,
+.add-project-form-label {
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+label {
+  font-size: 15px;
+  padding: 0 10px;
+}
+
+#date-due {
+  margin-left: 20px;
+}
+
+.priority-fm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="radio"] {
+  /* This hides the radio buttons */
+  width: 1px;
+}
+
+.priority-label {
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.priority-label:hover {
+  color: white;
+}
+
+.low-fm {
+  border: 1px solid green;
+  color: green;
+}
+
+.low-fm:hover {
+  background-color: green;
+}
+
+.low-fm-active {
+  background-color: green;
+  color: white;
+}
+
+.medium-fm {
+  border: 1px solid orange;
+  color: orange;
+}
+
+.medium-fm:hover {
+  background-color: orange;
+}
+
+.medium-fm-active {
+  background-color: orange;
+  color: white;
+}
+
+.high-fm {
+  border: 1px solid red;
+  color: red;
+}
+
+.high-fm:hover {
+  background-color: red;
+}
+
+.high-fm-active {
+  background-color: red;
+  color: white;
+}
+
+/* ADD NOTES FORM ########################################################################*/
+
+#add-note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* display: none; */
+}
+
+textarea {
+  border: 1px solid #b5c0cc;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+textarea:focus {
+  border: 2px solid #078a33;
+}
+
+/* ADD PROJECT FORM #################################################################################*/
+
+#add-project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* display: none; */
 }
