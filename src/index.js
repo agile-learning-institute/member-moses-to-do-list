@@ -1,1 +1,4 @@
-import './styles.css';
+import "./styles.css";
+import loadHome from "./loadHome";
+
+loadHome();
