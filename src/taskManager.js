@@ -216,6 +216,8 @@ export function editTask(
   );
 
   saveAllProjectsToLocalStorage();
+
+  location.reload();
 }
 
 // return SPECIFIC task

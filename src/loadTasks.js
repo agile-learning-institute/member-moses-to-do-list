@@ -66,6 +66,17 @@ function loadTask(title, detail, dateDue, priority, taskID) {
   taskDetail.classList.add("details");
   taskDetail.textContent = detail.slice(0, 35) + "...";
 
+  const mediaQuery = window.matchMedia("(min-width: 950px)");
+  mediaQuery.addListener((event) => {
+    if (event.matches) {
+      taskDetail.textContent = detail.slice(0, 30) + "...";
+      taskTitle.textContent = title.slice(0, 35) + "...";
+    } else {
+      taskDetail.textContent = detail.slice(0, 15) + "...";
+      taskTitle.textContent = title.slice(0, 15) + "...";
+    }
+  });
+
   taskDetailsCont.appendChild(taskTitle);
   taskDetailsCont.appendChild(taskDetail);
 

@@ -94,6 +94,7 @@ footer {
   flex-direction: column;
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   width: 100dvw;
+  min-width: 410px;
 }
 
 .nav-item {
@@ -439,4 +440,28 @@ textarea:focus {
   flex-direction: column;
   gap: 20px;
   /* display: none; */
+}
+
+@media (max-width: 850px) {
+
+  .date-due {
+    display: none;
+  }
+
+  .nav-item, .project {
+    font-size: 0.8em;
+  }
+
+  .left-nav {
+    min-width: 200px;
+  }
+
+  .add-note-btn {
+    width: 17px;
+    height: 17px;
+  }
+
+  .add-task {
+    font-size: 13px;
+  }
 }
