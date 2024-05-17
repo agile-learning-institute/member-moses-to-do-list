@@ -3,6 +3,12 @@ A simple To-Do List App using various JavaScript concepts and **SOLID** OOP Prin
 
 <img src='./dist/images/header-pic.png'>
 
+## Functionality
+* Add Task
+* Add Project
+* Edit Task
+* Delete Task
+
 ## Live
 Check it out live [**here**](https://agile-learning-institute.github.io/member-moses-to-do-list/).
 
