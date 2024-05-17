@@ -263,6 +263,16 @@ footer {
   cursor: pointer;
 }
 
+.edit {
+  color: #187e35;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.edit:hover {
+  transform: scale(1.2);
+}
+
 .add-task {
   background-color: #24a148;
   width: 140px;

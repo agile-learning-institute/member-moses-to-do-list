@@ -1,10 +1,18 @@
 import {
   createAddProject,
   createTask,
+  editTask,
   saveTaskToAllProjects,
 } from "./taskManager";
 
-export default function handleTaskSubmit(formData) {
+export default function handleTaskSubmit(event) {
+  const formData = new FormData(this);
+
+  // handleTaskSubmit(formData);
+  // event.preventDefault();
+
+  // addTaskForm.reset();
+
   const formDetails = {};
 
   for (let pair of formData.entries()) {
@@ -12,7 +20,7 @@ export default function handleTaskSubmit(formData) {
   }
 
   const {
-    "set-project": project,
+    "set-project": projectTitle,
     "task-title": title,
     "task-details": details,
     "date-due": dateDue,
@@ -21,7 +29,28 @@ export default function handleTaskSubmit(formData) {
 
   const newTask = createTask(title, details, priority, dateDue, false, true);
 
-  saveTaskToAllProjects(newTask, project);
+  saveTaskToAllProjects(newTask, projectTitle);
+
+  location.reload();
+  // loadProjectTasks(project);
+}
+
+export function handleTaskEdit(formData, taskID) {
+  const formDetails = {};
+
+  for (let pair of formData.entries()) {
+    formDetails[pair[0]] = pair[1];
+  }
+
+  const {
+    "set-project": projectTitle,
+    "task-title": title,
+    "task-details": details,
+    "date-due": dateDue,
+    priority,
+  } = formDetails;
+
+  editTask(projectTitle, title, details, dateDue, priority, taskID);
 
   location.reload();
   // loadProjectTasks(project);

@@ -1,7 +1,9 @@
+import { editTaskForm } from "./loadForms";
 import getAllTasks, {
   getProjectTasks,
   getFavoriteTasks,
   deleteTask,
+  editTask,
 } from "./taskManager";
 
 export function loadAllTasks() {
@@ -10,7 +12,7 @@ export function loadAllTasks() {
   const allTasks = getAllTasks();
 
   allTasks.map((task) => {
-    loadTask(task.title, task.details, task.dateDue, task.priority);
+    loadTask(task.title, task.details, task.dateDue, task.priority, task.id);
   });
 }
 
@@ -20,22 +22,22 @@ export function loadFavoriteTasks() {
   const favoriteTasks = getFavoriteTasks();
 
   favoriteTasks.map((task) => {
-    loadTask(task.title, task.details, task.dateDue, task.priority);
+    loadTask(task.title, task.details, task.dateDue, task.priority, task.id);
   });
 }
 
 // refactor to load project tasks dynamically ////////////////////////////////////////////############
-export function loadProjectTasks(projectTitle) {
+export function loadProjectTasks(projectID) {
   document.querySelector(".main").innerHTML = "";
 
-  const projectTasks = getProjectTasks(projectTitle);
+  const projectTasks = getProjectTasks(projectID);
 
   projectTasks.map((task) => {
-    loadTask(task.title, task.details, task.dateDue, task.priority);
+    loadTask(task.title, task.details, task.dateDue, task.priority, task.id);
   });
 }
 
-function loadTask(title, detail, dateDue, priority) {
+function loadTask(title, detail, dateDue, priority, taskID) {
   const taskCont = document.createElement("div");
   taskCont.classList.add("task");
 
@@ -83,12 +85,26 @@ function loadTask(title, detail, dateDue, priority) {
   taskPriority.textContent =
     priority === "Medium" || priority === "medium" ? "Med" : priority;
 
+  const editTaskBtn = document.createElement("button");
+  editTaskBtn.classList.add("edit");
+  editTaskBtn.setAttribute("id", taskID);
+  // add event listener to edit task
+  editTaskBtn.addEventListener("click", function () {
+    editTaskForm(taskID);
+    // location.reload();
+  });
+
+  const editIcon = document.createElement("i");
+  editIcon.classList.add("fa-solid", "fa-edit");
+
+  editTaskBtn.appendChild(editIcon);
+
   const deleteTaskBtn = document.createElement("button");
   deleteTaskBtn.classList.add("delete");
-  deleteTaskBtn.setAttribute("id", title);
+  deleteTaskBtn.setAttribute("id", taskID);
   // add event listener to delete task
   deleteTaskBtn.addEventListener("click", function () {
-    deleteTask(title, detail);
+    deleteTask(taskID);
     location.reload();
   });
 
@@ -99,6 +115,7 @@ function loadTask(title, detail, dateDue, priority) {
 
   taskRightGp.appendChild(taskDueDate);
   taskRightGp.appendChild(taskPriority);
+  taskRightGp.appendChild(editTaskBtn);
   taskRightGp.appendChild(deleteTaskBtn);
   //
 

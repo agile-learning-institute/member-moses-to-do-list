@@ -134,17 +134,17 @@ function renderLeftNav() {
     // load project list elements dynamically from projects list /////////
     let projectsList = getAllProjectTitles();
 
-    projectsList.forEach((projectTitle) => {
+    projectsList.forEach((project) => {
       const projectEle = document.createElement("div");
       projectEle.classList.add("project");
-      projectEle.textContent = projectTitle;
+      projectEle.textContent = project.title;
       projectEle.addEventListener("click", function () {
-        loadProjectTasks(projectTitle);
+        loadProjectTasks(project.id);
       });
 
       const projectEleCount = document.createElement("span");
       projectEleCount.classList.add("count");
-      projectEleCount.textContent = getProjectTaskCount(projectTitle); //
+      projectEleCount.textContent = getProjectTaskCount(project.id); //
 
       projectEle.appendChild(projectEleCount);
 

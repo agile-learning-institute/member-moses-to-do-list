@@ -3,8 +3,14 @@
 import handleTaskSubmit, {
   handleNoteSubmit,
   handleProjectSubmit,
+  handleTaskEdit,
 } from "./handleForms";
-import { getAllProjectTitles } from "./taskManager";
+import {
+  dateStringToObject,
+  getAllProjectTitles,
+  getTask,
+  getTaskProject,
+} from "./taskManager";
 
 export default function createTaskForm() {
   document.querySelector(".main").innerHTML = "";
@@ -28,8 +34,8 @@ export default function createTaskForm() {
   projectOptions.forEach((option) => {
     const optionElement = document.createElement("option");
     // optionElement.setAttribute('value', option.toLowerCase().split(' ').join('-'));
-    optionElement.setAttribute("value", option);
-    optionElement.textContent = option;
+    optionElement.setAttribute("value", option.title);
+    optionElement.textContent = option.title;
 
     select.appendChild(optionElement);
   });
@@ -72,6 +78,7 @@ export default function createTaskForm() {
   lowInput.setAttribute("id", "low");
   lowInput.setAttribute("value", "low");
   lowInput.required = true;
+  lowInput.addEventListener("change", handlePriorityChange);
 
   const lowLabel = document.createElement("label");
   lowLabel.classList.add("priority-label", "low-fm");
@@ -84,6 +91,7 @@ export default function createTaskForm() {
   mediumInput.setAttribute("id", "medium");
   mediumInput.setAttribute("value", "medium");
   mediumInput.required = true;
+  mediumInput.addEventListener("change", handlePriorityChange);
 
   const mediumLabel = document.createElement("label");
   mediumLabel.classList.add("priority-label", "medium-fm");
@@ -96,6 +104,7 @@ export default function createTaskForm() {
   highInput.setAttribute("id", "high");
   highInput.setAttribute("value", "high");
   highInput.required = true;
+  highInput.addEventListener("change", handlePriorityChange);
 
   const highLabel = document.createElement("label");
   highLabel.classList.add("priority-label", "high-fm");
@@ -126,16 +135,65 @@ export default function createTaskForm() {
   addTaskForm.appendChild(submitTaskBtn);
 
   // add event listener to handle form submission
-  addTaskForm.addEventListener("submit", function (event) {
-    const formData = new FormData(this);
-
-    handleTaskSubmit(formData);
-    // event.preventDefault();
-
-    addTaskForm.reset();
-  });
+  addTaskForm.addEventListener("submit", handleTaskSubmit);
 
   document.querySelector(".main").appendChild(addTaskForm);
+}
+
+// Function to handle radio input change
+function handlePriorityChange(event) {
+  const target = event.target;
+  const priorityLabels = document.querySelectorAll(".priority-label");
+
+  priorityLabels.forEach((label) => {
+    label.classList.remove(
+      "low-fm-active",
+      "medium-fm-active",
+      "high-fm-active"
+    );
+  });
+
+  // Add active class based on the selected priority radio input
+  if (target.id === "low" && target.checked) {
+    document.querySelector(".low-fm").classList.add("low-fm-active");
+  } else if (target.id === "medium" && target.checked) {
+    document.querySelector(".medium-fm").classList.add("medium-fm-active");
+  } else if (target.id === "high" && target.checked) {
+    document.querySelector(".high-fm").classList.add("high-fm-active");
+  }
+}
+
+// EDIT TASK FORM
+export function editTaskForm(taskID) {
+  const taskToEdit = getTask(taskID);
+  const taskProject = getTaskProject(taskID);
+
+  createTaskForm();
+
+  document.querySelector(".add-task-form-label").textContent = "Edit Task";
+  document.querySelector("#set-project").value = taskProject.title;
+  document.querySelector(".task-title").value = taskToEdit.title;
+  document.querySelector(".task-details").value = taskToEdit.details;
+  document.querySelector("#date-due").valueAsDate = dateStringToObject(
+    taskToEdit.dateDue
+  );
+  document.getElementById(taskToEdit.priority.toLowerCase()).checked = true;
+  document
+    .getElementById(taskToEdit.priority.toLowerCase())
+    .dispatchEvent(new Event("change"));
+
+  document
+    .querySelector("#add-task-form")
+    .removeEventListener("submit", handleTaskSubmit);
+  document
+    .querySelector("#add-task-form")
+    .addEventListener("submit", function (event) {
+      const formData = new FormData(this);
+
+      handleTaskEdit(formData, taskID);
+      // event.preventDefault();
+      this.reset();
+    });
 }
 
 // CREATE NOTE FORM
